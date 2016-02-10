@@ -29,11 +29,16 @@ module.exports = {
         include: path.join(__dirname, 'src')
       },
       {
+        test: /\.scss$/,
+        // autoprefixer comes from http://foundation.zurb.com/sites/docs/sass.html#autoprefixer-required
+        loader: "style!css!autoprefixer?{browsers:['last 2 versions', 'ie >= 9', 'and_chr >= 2.3']}!sass"
+      },
+      {
         test: /\.css/,
         exclude: [/node_modules/],
         // for more informaiton see https://github.com/webpack/css-loader for more information
         // and https://github.com/postcss/postcss-loader
-        loader: 'style!css?module&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
+        loader: 'style!css?module&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss?'
       }
     ]
   },
@@ -46,10 +51,10 @@ module.exports = {
       // use tomorrow’s CSS syntax, today
       cssnext({
         autoprefixer: ['last 2 version'],
-        import: {
-          path: ['node_modules', 'src/styles']
-        }
       })
     ]
+  },
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "node_modules")]
   }
 }
