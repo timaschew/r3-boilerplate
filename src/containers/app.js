@@ -12,7 +12,7 @@ class App extends Component {
     const { children } = this.props
     return (
       <div>
-        <h1>Menu</h1>
+        <h1>App Header</h1>
         {children}
       </div>
     )

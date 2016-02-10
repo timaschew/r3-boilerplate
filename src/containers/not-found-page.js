@@ -1,22 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Dashboard from '../components/dashboard'
-
-class DashboardPage extends Component {
-  constructor(props) {
-    super(props)
-  }
+class NotFoundPage extends Component {
 
   render() {
     return (
-      <Dashboard url={this.props.url} />
+      <div>
+        <h1>Page not found</h1>
+        <div>The page you are looking for "<strong>{this.props.url}</strong>" does not exist.</div>
+      </div>
     )
   }
-}
-
-DashboardPage.propTypes = {
-
 }
 
 function mapStateToProps(state) {
@@ -26,4 +20,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-})(DashboardPage)
+})(NotFoundPage)

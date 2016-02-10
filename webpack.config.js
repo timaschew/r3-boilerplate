@@ -1,5 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
+var cssnext = require('cssnext')
+var precss = require('precss')
+var postcssImport = require('postcss-import')
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -24,7 +27,29 @@ module.exports = {
         loaders: [ 'babel' ],
         exclude: /node_modules/,
         include: path.join(__dirname, 'src')
+      },
+      {
+        test: /\.css/,
+        exclude: [/node_modules/],
+        // for more informaiton see https://github.com/webpack/css-loader for more information
+        // and https://github.com/postcss/postcss-loader
+        loader: 'style!css?module&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
       }
+    ]
+  },
+  postcss: function(webpack) {
+    return [
+      // handle hot reloading for @import'ed files
+      postcssImport({addDependencyTo: webpack}),
+      // use Sass-like markup in your CSS
+      precss,
+      // use tomorrow’s CSS syntax, today
+      cssnext({
+        autoprefixer: ['last 2 version'],
+        import: {
+          path: ['node_modules', 'src/styles']
+        }
+      })
     ]
   }
 }

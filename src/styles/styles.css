@@ -1,0 +1,15 @@
+$blue: #888;
+$column: 200px;
+
+.menu {
+    width: calc(4 * $column);
+    background-color: #ccc;
+}
+
+.menu_link {
+    background: $blue;
+    width: $column;
+    a {
+      font-weight: bold;
+    }
+}
