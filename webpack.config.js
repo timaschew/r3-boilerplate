@@ -68,6 +68,9 @@ module.exports = {
         // addDependencyTo allow to handle hot reloading for @import'ed files
         // https://github.com/postcss/postcss-import
         require("postcss-import")({ addDependencyTo: webpack }),
+        // fix url path for @import'ed files
+        // https://github.com/postcss/postcss-url
+        require("postcss-url"), // not working with fontawesome
         // use sass like syntax, you can also load particular features, see
         // https://github.com/jonathantneal/precss#plugins
         require('precss'),
