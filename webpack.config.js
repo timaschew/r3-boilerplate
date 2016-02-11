@@ -27,14 +27,19 @@ module.exports = {
         include: path.join(__dirname, 'src')
       },
       {
-        // the url-loader uses DataUrls.
+        // woff fonts
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        loader: "url?limit=10000&mimetype=application/font-woff"
       },
       {
-        // the file-loader emits files.
+        // fonts and svg
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        loader: "file"
+      },
+      {
+        // images
+        test: /\.(ico|jpe?g|png|gif)$/,
+        loader: "file"
       },
       {
         // for some modules like foundation
@@ -61,16 +66,17 @@ module.exports = {
       defaults: [
         // handle @import of node_modules and inline them
         // addDependencyTo allow to handle hot reloading for @import'ed files
+        // https://github.com/postcss/postcss-import
         require("postcss-import")({ addDependencyTo: webpack }),
-        // fix url() of inlined @import'ed files
-        // require("postcss-url")({}), // not working with fontawesome
-        // use Sass-like markup in your CSS
+        // use sass like syntax, you can also load particular features, see
+        // https://github.com/jonathantneal/precss#plugins
         require('precss'),
         // use tomorrow’s CSS syntax, today
-        require("cssnext")()
+        // https://github.com/MoOx/postcss-cssnext/blob/master/src/features.js
+        require("postcss-cssnext")
       ],
       autoprefix: [
-        // foundation needs autoprefixer
+        // sass libraries like foundation needs an autoprefixer
         // see http://foundation.zurb.com/sites/docs/sass.html#autoprefixer-required
         autoprefixer({browsers: ['last 2 versions', 'ie >= 9', 'and_chr >= 2.3']})
       ]

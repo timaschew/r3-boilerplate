@@ -6,7 +6,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <h3>Dashboard <i className="fa fa-fort-awesome"></i></h3>
+        <h3><i className="fa fa-4 fa-fort-awesome"></i> </h3>
         <div>Current URL: {this.props.url}</div>
         <div>Some Links:</div>
         <div className={styles.menu}>
