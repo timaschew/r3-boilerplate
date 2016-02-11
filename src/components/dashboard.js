@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import styles from '../styles/styles.css'
+import styles from '../styles/styles-l.css'
 
 export default class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <h3>Dashboard</h3>
+        <h3>Dashboard <i className="fa fa-fort-awesome"></i></h3>
         <div>Current URL: {this.props.url}</div>
         <div>Some Links:</div>
         <div className={styles.menu}>

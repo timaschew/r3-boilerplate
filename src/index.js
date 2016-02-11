@@ -10,5 +10,3 @@ render(
   <Root store={store} />,
   document.getElementById('root')
 )
-
-require('./styles/foundation.scss')
