@@ -1,3 +1,5 @@
+@import "foo";
+
 $blue: #888;
 $column: 200px;
 

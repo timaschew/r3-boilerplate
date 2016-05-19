@@ -42,21 +42,8 @@ module.exports = {
         loader: "file"
       },
       {
-        // for some modules like foundation
-        test: /\.scss$/,
-        exclude: [/node_modules/], // sassLoader will include node_modules explicitly
-        loader: "style!css!postcss?pack=autoprefix!sass"
-      },
-      {
-        // ***.l.css for local css modules: https://github.com/css-modules/css-modules
-        test: /-l\.css$/,
-        // for more informaiton see https://github.com/webpack/css-loader for more information
-        // and https://github.com/postcss/postcss-loader
-        loader: 'style!css?module&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'
-      },
-      {
-        // for global files, not *.l.css
-        test: /^(?!.*-l\b).+\.css$/,
+        test: /\.css/,
+        exclude: [/node_modules/],
         loader: 'style!css!postcss'
       }
     ]
@@ -64,19 +51,10 @@ module.exports = {
   postcss: function(webpack) {
     return {
       defaults: [
-        // handle @import of node_modules and inline them
-        // addDependencyTo allow to handle hot reloading for @import'ed files
-        // https://github.com/postcss/postcss-import
-        require("postcss-import")({ addDependencyTo: webpack }),
-        // fix url path for @import'ed files
-        // https://github.com/postcss/postcss-url
-        require("postcss-url"), // not working with fontawesome
-        // use sass like syntax, you can also load particular features, see
-        // https://github.com/jonathantneal/precss#plugins
-        require('precss'),
-        // use tomorrow’s CSS syntax, today
-        // https://github.com/MoOx/postcss-cssnext/blob/master/src/features.js
-        require("postcss-cssnext")
+        require('postcss-cssnext')({
+          autoprefixer: ['last 2 version']
+        }),
+        require('precss')
       ],
       autoprefix: [
         // sass libraries like foundation needs an autoprefixer

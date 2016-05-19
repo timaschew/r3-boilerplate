@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import styles from '../styles/styles-l.css'
+import '../styles/styles.css'
+let styles = {}
 
 export default class Dashboard extends Component {
   render() {
